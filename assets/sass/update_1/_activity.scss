@@ -1,0 +1,45 @@
+.activity-box {
+    display: flex;
+    gap: 20px;
+    &_icon {
+        img {
+            width: 100%;
+        }
+    }
+    &_title {
+        font-weight: bold;
+        margin-top: -0.24em;
+        margin-bottom: 10px;
+    }
+    &_text {
+        margin-bottom: -0.5em;
+    }
+}
+.img-box13 {
+    img {
+        max-width: fit-content;
+    }
+}
+
+@include lg {
+    .img-box13 {
+        margin-top: 50px;
+        text-align: center;
+        img {
+            max-width: 100%;
+        }
+    }
+}
+
+@include sm {
+    .activity-box {
+        display: block;
+        text-align: center;
+        &_icon {
+            margin-bottom: 20px;
+            img {
+                width: auto;
+            }
+        }
+    }
+}

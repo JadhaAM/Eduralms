@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eduport - Courses Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --secondary: #6c757d;
+            --success: #20c997;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --sidebar-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7f9;
+        }
+
+        .sidebar {
+            position: fixed;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: #233d63;
+            color: #fff;
+            padding: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 0.5rem;
+        }
+
+        .logo span {
+            color: #ff5733;
+        }
+
+        .nav-item{
+            padding: 0.75rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-item >a{
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .stat-card h2 {
+            font-size: 2.5rem;
+            margin: 1rem 0;
+        }
+
+        .total-courses h2 { color: var(--primary); cursor: pointer; }
+        .active-courses h2 { color: var(--success); }
+        .pending-courses h2 { color: var(--warning); }
+
+        .search-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .search-bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 0.5rem;
+            width: 100%;
+        }
+
+        .sort-by {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            outline: none;
+        }
+
+        .courses-table {
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .courses-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .courses-table th {
+            background: #2c3e50;
+            color: white;
+            text-align: left;
+            padding: 1rem;
+        }
+
+        .courses-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .course-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .course-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .instructor {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .instructor img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .badge-beginner {
+            background: #e3f2fd;
+            color: var(--primary);
+        }
+
+        .badge-intermediate {
+            background: #f3e5f5;
+            color: #9c27b0;
+        }
+
+        .badge-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-approve {
+            background: #e8f5e9;
+            color: var(--success);
+        }
+
+        .btn-reject {
+            background: #ffebee;
+            color: var(--danger);
+        }
+
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .courses-table {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <div>Edura</div>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-home"></i>
+          <a href="./admin.html">
+            Dashboard</a>  
+        </div>
+        <div class="nav-item ">
+            <i class="fas fa-book"></i>
+            <a href="./adminCourses.html">Courses</a> 
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-blog"></i>
+           <a href="./AdminBlog.html">Blog</a> 
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-users"></i>
+           <a href="./Student.html"> Students</a>
+        </div>
+        <div class="nav-item active">
+         <i class="fas fa-chalkboard-teacher"></i>
+         <a href="./instructor.html">Instructors</a> 
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-star"></i>
+          <a href="./adminReviews.html">Reviews</a>  
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-dollar-sign"></i>
+            Earnings
+        </div>
+        <div class="nav-item ">
+            <i class="fas fa-cog"></i>
+         <a href="./adminSetting.html">Settings</a>   
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1> Instructors</h1>
+            <!-- <button class="btn btn-primary" onclick="window.location.href='./courseCreateForm.html'">Create a Course</button> -->
+        </div>
+
+        <!-- <div class="stats-grid">
+            <div class="stat-card total-courses" onclick="window.location.href='./totalCourses.html'">
+                <p>Total Courses</p>
+                <h2>1200</h2>
+            </div>
+            <div class="stat-card active-courses">
+                <p>Activated Courses</p>
+                <h2>996</h2>
+            </div>
+            <div class="stat-card pending-courses">
+                <p>Pending Courses</p>
+                <h2>200</h2>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            <select class="sort-by">
+                <option value="">Sort by</option>
+                <option value="name">Name</option>
+                <option value="date">Date</option>
+                <option value="price">Price</option>
+            </select>
+        </div>
+
+        <div class="courses-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Category</th>
+                        <th>Added Date</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="course-info">
+                                <div class="course-icon" style="background: #ffd700">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div>Building Scalable APIs with GraphQL</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="instructor">
+                                
+                                <span>Web devlopment</span>
+                            </div>
+                        </td>
+                        <td>28 Oct 2021</td>
+                        <td><span class="badge badge-beginner">Beginner</span></td>
+                        <td>$350</td>
+                        <td><span class="badge badge-pending">live</span></td>
+                        <td>
+                            <button class="btn btn-approve">Approve</button>
+                            <button class="btn btn-reject">Reject</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="course-info">
+                                <div class="course-icon" style="background: #9c27b0">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                                <div>Bootstrap 5 From Scratch</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="instructor">
+                               
+                                <span>web devlopment</span>
+                            </div>
+                        </td>
+                        <td>16 Oct 2021</td>
+                        <td><span class="badge badge-intermediate">Intermediate</span></td>
+                        <td>$256</td>
+                        <td><span class="badge badge-pending">live</span></td>
+                        <td>
+                            <button class="btn btn-approve">Approve</button>
+                            <button class="btn btn-reject">Reject</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="course-info">
+                                <div class="course-icon" style="background: #27b032">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div>Building Scalable and cross mobile application</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="instructor">
+                               
+                                <span>Mobile Development</span>
+                            </div>
+                        </td>
+                        <td>16 Jan 2021</td>
+                        <td><span class="badge badge-intermediate">Intermediate</span></td>
+                        <td>$356</td>
+                        <td><span class="badge badge-pending">live</span></td>
+                        <td>
+                            <button class="btn btn-approve">Approve</button>
+                            <button class="btn btn-reject">Reject</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> -->
+
+    <script>
+        // Search functionality
+        document.querySelector('.search-bar input').addEventListener('input', function(e) {
+            // Add search logic here
+        });
+
+        // Sort functionality
+        document.querySelector('.sort-by').addEventListener('change', function(e) {
+            // Add sort logic here
+        });
+
+        // Approve/Reject buttons
+        document.querySelectorAll('.btn-approve, .btn-reject').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Add approval/rejection logic here
+            });
+        });
+    </script>
+</body>
+</html>

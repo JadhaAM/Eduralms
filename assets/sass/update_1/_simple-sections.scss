@@ -1,0 +1,110 @@
+.about-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .avater {
+        width: 60px;
+        height: 60px;
+        border-radius: 999px;
+        overflow: hidden;
+    }
+    .desig {
+        margin-bottom: 0;
+        margin-top: 5px;
+    }
+}
+.rounded-10 {
+    border-radius: 10px;
+}
+.btn-group {
+    &:has(.about-profile) {
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        max-width: 500px;
+    }
+}
+
+.img-box12 {
+    border-radius: 30px;
+    overflow: hidden;
+    margin-left: 70px;
+    img {
+        width: 100%;
+    }
+}
+
+.checklist {
+    &.style5 {
+        li {
+            color: $body-color;
+            &:before {
+                content: '\f336';
+            }
+        }
+    }
+}
+
+@include ml {
+    .img-box12 {
+        margin-left: 0;
+    }
+}
+
+@include lg {
+    .img-box12 {
+        margin-bottom: 40px;
+    }
+}
+
+.cta-cloud {
+    text-align: center;
+    max-width: 700px;
+    background-size: 100% 100%;
+    padding: 150px 100px 140px 100px;
+    .cta-call {
+        color: $theme-color3;
+        font-size: 36px;
+        line-height: 1;
+        font-weight: 700;
+        display: block;
+        &:hover {
+            color: $theme-color;
+        }
+    }
+}
+
+.mt-negative-v1 {
+    background-size: 100% 100%;
+    margin-top: -80px;
+}
+
+@include lg {
+    .cta-cloud {
+        max-width: 600px;
+        .cta-call {
+            font-size: 28px;
+        }
+    }
+}
+
+@include md {
+    .cta-cloud {
+        padding: 110px 100px 100px 100px;
+    }
+}
+
+@include xs {
+    .cta-cloud {
+        padding: 110px 40px 100px 40px;
+        .cta-call {
+            font-size: 22px;
+        }
+    }
+}
+
+@include vxs {
+    .cta-cloud {
+        padding: 110px 20px 100px 20px;
+    }
+}

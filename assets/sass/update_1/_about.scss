@@ -1,0 +1,51 @@
+.award-box {
+    &-wrap {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+    background-color: $smoke-color;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px 5px;
+    &_icon {
+        margin-bottom: 15px;
+    }
+    &_title {
+        margin-bottom: 2px;
+    }
+    &_time {
+        margin-bottom: -0.5em;
+    }
+}
+.img-box10 {
+    position: relative;
+    right: 2px;
+    &:before {
+        content: '';
+        @include equal-size(277px);
+        background-color: $theme-color;
+        position: absolute;
+        bottom: 0;
+        left: -50px;
+        z-index: -1;
+        clip-path: polygon(0 0, 0% 100%, 100% 100%);
+    }
+    .img1 {
+        padding-bottom: 50px;
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+    }
+}
+
+@include sm {
+    .award-box {
+        &-wrap {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}
+

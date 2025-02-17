@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eduport Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --secondary: #6c757d;
+            --success: #198754;
+            --purple: #6f42c1;
+            --sidebar-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7f9;
+        }
+
+        .sidebar {
+            position: fixed;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: #233d63;
+            color: #fff;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 0.5rem;
+        }
+
+        .logo span {
+            color: #ff5733;
+        }
+
+        .nav-item {
+            padding: 0.75rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .nav-item >a{
+            color: white;
+            text-decoration: none;
+        }
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 0.5rem;
+            width: 300px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: var(--secondary);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .requests-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .request-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .request-item:last-child {
+            border-bottom: none;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .crud-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+     <script src="config.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <div>Edura</div>
+        </div>
+        <div class="nav-item active">
+            <i class="fas fa-home"></i>
+            Dashboard
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-book"></i>
+           <a href="./adminCourses.html"> Courses</a>
+        </div>
+        <div class="nav-item ">
+            <i class="fas fa-blog"></i>
+           <a href="./AdminBlog.html">Blog</a> 
+        </div>
+        <!-- <div class="nav-item ">
+            <i class="fas fa-users"></i>
+           <a href="./Student.html"> Students</a>
+        </div>
+        <div class="nav-item ">
+         <i class="fas fa-chalkboard-teacher"></i>
+         <a href="./instructor.html">Instructors</a> 
+        </div> -->
+        <div class="nav-item">
+            <i class="fas fa-star"></i>
+          <a href="./adminReviews.html">Reviews</a>  
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-dollar-sign"></i>
+            Earnings
+        </div>
+        <div class="nav-item ">
+            <i class="fas fa-cog"></i>
+         <a href="./adminSetting.html">Settings</a>   
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            <button class="btn btn-primary" onclick="window.location.href='./courseCreateForm.html'">Add New Course</button> 
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>1958</h3>
+                <p>Completed Courses</p>
+            </div>
+            <div class="stat-card">
+                <h3>1600</h3>
+                <p>Enrolled Courses</p>
+            </div>
+            <div class="stat-card">
+                <h3>1235</h3>
+                <p>Course In Progress</p>
+            </div>
+            <div class="stat-card">
+                <h3>845hrs</h3>
+                <p>Total Watch Time</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="chart-container">
+                <h2>Earnings</h2>
+                <canvas id="earningsChart"></canvas>
+            </div>
+            <div class="requests-container">
+                <div class="header">
+                    <h2>Support Requests</h2>
+                    <a href="#" style="color: var(--primary)">View all</a>
+                </div>
+                <div class="request-item">
+                    <div class="avatar">LS</div>
+                    <div>
+                        <h4>Lori Stevens</h4>
+                        <p>New ticket #759 for General Enquiry</p>
+                        <small>8 hour ago</small>
+                    </div>
+                </div>
+                <div class="request-item">
+                    <div class="avatar">DB</div>
+                    <div>
+                        <h4>Dennis Barrett</h4>
+                        <p>Comment from Billy Vasquez on ticket #659</p>
+                        <small>8 hour ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Modal -->
+    <div id="courseModal" class="crud-modal">
+        <div class="modal-content">
+            <h2>Add New Course</h2>
+            <form id="courseForm">
+                <div class="form-group">
+                    <label>Course Title</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Duration (hours)</label>
+                    <input type="number" required>
+                </div>
+                <div class="form-group">
+                    <label>Price ($)</label>
+                    <input type="number" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Course</button>
+                <button type="button" class="btn btn-secondary" onclick="hideModal('course')">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Blog Modal -->
+    <div id="blogModal" class="crud-modal">
+        <div class="modal-content">
+            <h2>Add New Blog Post</h2>
+            <form id="blogForm">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Publish Post</button>
+                <button type="button" class="btn btn-secondary" onclick="hideModal('blog')">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+   
+    <script type="module" src="./firbaseScript.js"></script>
+    <script>
+        const ctx = document.getElementById('earningsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Earnings ($)',
+                    data: [2909, 1259, 950, 1563, 1825, 2526, 2010],
+                    fill: true,
+                    borderColor: '#0d6efd',
+                    backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function showModal(type) {
+            document.getElementById(`${type}Modal`).style.display = 'flex';
+        }
+
+        function hideModal(type) {
+            document.getElementById(`${type}Modal`).style.display = 'none';
+        }
+
+       
+        document.getElementById('courseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add course handling logic here
+            hideModal('course');
+        });
+
+        document.getElementById('blogForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add blog handling logic here
+            hideModal('blog');
+        });
+
+        // Mobile menu toggle
+        let sidebarVisible = true;
+        function toggleSidebar() {
+            sidebarVisible = !sidebarVisible;
+            document.querySelector('.sidebar').style.transform = 
+                sidebarVisible ? 'translateX(0)' : 'translateX(-100%)';
+            document.querySelector('.main-content').style.marginLeft = 
+                sidebarVisible ? 'var(--sidebar-width)' : '0';
+        }
+    </script>
+</body>
+</html>

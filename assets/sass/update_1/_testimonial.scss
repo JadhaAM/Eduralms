@@ -1,0 +1,41 @@
+.testi-grid-style3 {
+    background: $white-color;
+    border: none;
+    box-shadow: 0px 10px 15px rgba(0, 14, 57, 0.04);
+    padding: 40px;
+    position: relative;
+    .testi-grid {
+        &_avater {
+            width: 70px;
+            border-radius: 10px;
+        }
+        &_text {
+            color: $body-color;
+            font-size: 16px;
+            line-height: 1.7;
+            font-family: $body-font;
+            margin-top: -0.5em;
+        }
+        &_name {
+            color: $title-color;
+            font-weight: 700;
+        }
+        &_bottom {
+            border-color: $theme-color;
+        }
+        &_quote {
+            position: absolute;
+            bottom: 60px;
+            right: 40px;
+        }
+    }
+}
+
+@include vxs {
+    .testi-grid-style3 {
+        padding: 40px 20px;
+        .testi-grid_quote {
+            right: 20px;
+        }
+    }
+}

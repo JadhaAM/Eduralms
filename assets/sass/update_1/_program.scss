@@ -1,0 +1,64 @@
+.program-card {
+    &-wrap {
+        border: 1px dashed $theme-color;
+        padding: 20px;
+        border-radius: 20px;
+    }
+    text-align: center;
+    background-color: $theme-color;
+    border-radius: inherit;
+    position: relative;
+    padding: 0 27px 12px 27px;
+    z-index: 2;
+    &_img {
+        max-width: 200px;
+        margin: 0 auto 18px auto;
+        padding: 0 20px 20px 20px;
+        background-color: rgba($color: #fff, $alpha: 0.20);
+        border-radius: 0 0 999px 999px;
+        img {
+            border-radius: inherit;
+        }
+    }
+    &_title,
+    &_year,
+    &_text {
+        color: $white-color;
+    }
+    &_title {
+        margin-bottom: 0;
+        a {
+            &:hover {
+                color: $title-color;
+            }
+        }
+    }
+    &_year {
+        font-size: 14px;
+        border-bottom: 1px dashed rgba($color: #fff, $alpha: 0.3);
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+    &_text {
+        max-width: 300px;
+        margin: 0 auto 50px auto;
+    }
+    .link-btn {
+        color: $white-color;
+        &:before {
+            background-color: $white-color;
+        }
+    }
+    &_cloud {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        height: 71px;
+        width: 225px;
+        margin-left: -112.5px;
+        background-color: $white-color;
+        clip-path: path("M212.22 58.0098C218.889 59.0904 223.429 64.3913 225 71H4C0.86865 67.3374 0.0340561 64.7663 0.0001426 59.9321C-0.0224664 55.0979 2.64538 48.8305 6.59066 46.0665C13.2377 41.4029 20.9248 43.291 24.1918 44.7015C24.7683 41.1867 26.8031 35.943 31.3136 33.7932C38.5259 30.3467 45.0373 32.6444 47.1173 33.7591C46.8347 29.7552 49.5365 25.922 53.1087 24.1475C56.6923 22.3731 60.9427 22.4186 64.7976 23.4651C64.0741 20.5418 64.8767 14.9568 69.2968 12.1132C74.2369 8.92829 80.7709 8.00695 85.8579 10.9644C90.4136 3.10449 99.8416 -1.252 108.75 0.3177C117.658 1.8874 125.22 9.44015 126.848 18.392C129.471 15.4346 134.987 13.171 142.007 14.6497C149.943 16.3218 152.702 22.0432 154.216 24.6594C158.93 20.7807 165.453 19.2565 171.444 20.3143C177.436 21.3835 182.896 25.1713 185.993 30.4377C187.587 33.1335 188.559 36.1478 189.385 39.162C195.206 36.8075 201.605 37.6379 206.714 41.3005C211.824 44.9745 214.458 52.1178 212.22 58.0098Z");
+        opacity: 0.20;
+        z-index: -1;
+    }
+}

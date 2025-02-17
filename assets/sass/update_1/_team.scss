@@ -1,0 +1,110 @@
+.team-block {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
+    .team-img {
+        border: 1px dashed $theme-color;
+        margin-bottom: 30px;
+        border-radius: inherit;
+        background-color: $white-color;
+        padding: 20px;
+        position: relative;
+        img {
+            width: 100%;
+            transition: 0.4s ease-in-out;
+            border-radius: inherit;
+        }
+    }
+    .team-title {
+        font-size: 24px;
+        margin-bottom: 0;
+        margin-top: -0.23em;
+        font-weight: 700;
+        a {
+            color: inherit;
+            &:hover {
+                color: $theme-color;
+            }
+        }
+    }
+    .team-desig {
+        color: $theme-color;
+        display: block;
+        font-family: $title-font;
+        margin-bottom: -0.45em;
+    }
+    .icon-btn {
+        background-color: $theme-color;
+        color: $white-color;
+        position: relative;
+        z-index: 3;
+        i {
+            transition: 0.3s;
+        }
+        &:hover {
+            i {
+                transform: rotate(45deg);
+            }
+        }
+    }
+    .th-social {
+        position: absolute;
+        width: 45px;
+        bottom: 50px;
+        left: 2.5px;
+        a {
+            margin-right: 0;
+            margin-bottom: 5px;
+            background-color: $white-color;
+            color: $theme-color;
+            box-shadow: 0px 5px 18px rgba(76, 88, 104, 0.06);
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(45px);
+            transition: 0.3s ease-in-out;
+            &:nth-child(1) {
+                transition-delay: 0s;
+            }
+            &:nth-child(2) {
+                transition-delay: 0.1s;
+            }
+            &:nth-child(3) {
+                transition-delay: 0.2s;
+            }
+            &:nth-child(4) {
+                transition-delay: 0.3s;
+            }
+            &:hover {
+                background-color: $theme-color;
+                color: $white-color;
+            }
+        }
+    }
+    .team-social {
+        position: absolute;
+        bottom: -25px;
+        right: 40px;
+        &:hover {
+            .th-social {
+                a {
+                    visibility: visible;
+                    opacity: 1;
+                    transform: translateY(0);
+                    &:nth-child(4) {
+                        transition-delay: 0s;
+                    }
+                    &:nth-child(3) {
+                        transition-delay: 0.1s;
+                    }
+                    &:nth-child(2) {
+                        transition-delay: 0.2s;
+                    }
+                    &:nth-child(1) {
+                        transition-delay: 0.3s;
+                    }
+                }
+            }
+        }
+    }
+}
