@@ -10,6 +10,7 @@
     <meta name="keywords" content="Edura - Online Courses & Education HTML Template">
     <meta name="robots" content="INDEX,FOLLOW">
     <script src="config.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js"></script>
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -97,21 +98,21 @@
             <div class="th-mobile-menu">
                 <ul>
                     <li class="menu-item">
-                        <a href="./home-8.html">Home</a>
-                       
+                        <a href="./index.html">Home</a>
+
                     </li>
                     <li class="menu-item">
                         <a href="course.html">Courses</a>
                     </li>
-                   
+
                     <li class="menu-item">
                         <a href="about.html">About</a>
-                       
+
                     </li>
                     <li class="menu-item">
                         <a href="blog.html">Blog</a>
-                       
-                        
+
+
                     </li>
                     <li>
                         <a href="contact.html">Contact</a>
@@ -275,15 +276,15 @@ Header Area
                 </div>
             </div>
         </div>
-        <div class="sticky-wrapper">
-            <div class="sticky-active">
+        <div>
+            <div>
                 <!-- Main Menu Area -->
-                <div class="menu-area">
+                <div class="menu-area" data-bg-src="assets/img/update1/bg/pattern_bg_2.png">
                     <div class="container">
                         <div class="row align-items-center justify-content-between">
                             <div class="col-auto">
-                                <div class="header-logo">
-                                    <a href="index.html"><img src="assets/img/logo2.png" alt="Edura"></a>
+                                <div class="about-logo">
+                                    <a href="index.html"><img src="assets/img/logo.png" alt="Edura"></a>
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -292,21 +293,21 @@ Header Area
                                         <nav class="main-menu d-none d-lg-inline-block">
                                             <ul>
                                                 <li class="menu-item">
-                                                    <a href="./home-8.html">Home</a>
-                                                   
+                                                    <a href="./index.html">Home</a>
+
                                                 </li>
                                                 <li class="menu-item">
                                                     <a href="course-2.html">Courses</a>
                                                 </li>
-                                               
+
                                                 <li class="menu-item">
                                                     <a href="about.html">About</a>
-                                                   
+
                                                 </li>
                                                 <li class="menu-item">
                                                     <a href="blog.html">Blog</a>
-                                                   
-                                                    
+
+
                                                 </li>
                                                 <li>
                                                     <a href="contact.html">Contact</a>
@@ -318,16 +319,19 @@ Header Area
                                     </div>
                                     <div class="col-auto d-none d-xl-block">
                                         <div class="header-button">
-                                            <button type="button" class="simple-icon searchBoxToggler"><i
+                                            <button type="button" class="simple-icon me-3 searchBoxToggler"><i
                                                     class="far fa-search"></i></button>
-                                            <a href="contact.html" class="th-btn style3 ml-25">GET A QUOTE<i
+                                            <a href="contact.html" class="th-btn style3">Apply Now<i
                                                     class="fas fa-arrow-right ms-2"></i></a>
+                                            <a href="#" class="simple-icon style2 ms-3 sideMenuToggler"><i
+                                                    class="fa-sharp fa-solid fa-grid"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="logo-shape"></div>
                 </div>
             </div>
         </div>
@@ -370,11 +374,7 @@ Event Area
                                 <img id="course-image" src="assets/img/course/course-details.png" alt="Course Image">
                                 <span class="tag bg-theme" id="course-tag">BEST SELLER</span>
                             </div>
-                            <div class="course-meta style2">
-                                <span id="lesson-count">Lesson 8</span>
-                                <span id="student-count">Students 60+</span>
-                                <span id="course-level">Beginner</span>
-                            </div>
+
                             <h2 class="course-title" id="course-title">Education Software and PHP and JS System Script
                             </h2>
                             <ul class="course-single-meta">
@@ -425,7 +425,7 @@ Event Area
                                         <h5 class="h5">Description</h5>
                                         <p id="course-description">Rapidiously develop parallel e-markets via worldwide
                                             paradigms...</p>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
@@ -450,7 +450,7 @@ Event Area
                                     <!-- Pricing options will be populated here -->
                                 </ul>
                             </div>
-                            <a href="cart.html" class="th-btn style4 mt-25">Buy Now</a>
+                            <a href="#" class="th-btn style4 mt-25">Buy Now</a>
                             <h3 class="widget_title">Course Information</h3>
                             <div class="info-list">
                                 <ul>
@@ -489,11 +489,12 @@ Servce Area
                 <span class="sub-title"><i class="fal fa-book me-2"></i> Related Courses</span>
                 <h2 class="sec-title">Courses You May Like</h2>
             </div>
-            <div class="row slider-shadow th-carousel course-slider-1" id="course-list" data-slide-show="4" data-ml-slide-show="3"
-                data-lg-slide-show="3" data-md-slide-show="2" data-sm-slide-show="1" data-arrows="true">
-                
-                
-        </div>
+            <div class="row slider-shadow th-carousel course-slider-1" id="course-list" data-slide-show="4"
+                data-ml-slide-show="3" data-lg-slide-show="3" data-md-slide-show="2" data-sm-slide-show="1"
+                data-arrows="true">
+
+
+            </div>
     </section>
     <!--==============================
 	Footer Area
@@ -536,8 +537,8 @@ Servce Area
                         <div class="widget footer-widget">
                             <div class="th-widget-about">
                                 <h3 class="widget_title">About Company</h3>
-                                <p class="about-text">Continually optimize backward manufactured products whereas
-                                    communities negotiate life compelling alignments</p>
+                                <p class="about-text">Regal Comply offers top-tier training in HR, compliance, tech &
+                                    more, empowering professionals with expert-led courses.</p>
                                 <div class="th-social">
                                     <h6 class="title text-white">FOLLOW US ON:</h6>
                                     <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
@@ -549,21 +550,21 @@ Servce Area
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-xl-auto">
-                        <div class="widget widget_nav_menu footer-widget">
-                            <h3 class="widget_title">Quick Links</h3>
-                            <div class="menu-all-pages-container">
-                                <ul class="menu">
-                                    <li><a href="course-2.html">Life Coach</a></li>
-                                    <li><a href="course-2.html">Business Coach</a></li>
-                                    <li><a href="course-2.html">Health Coach</a></li>
-                                    <li><a href="course-2.html">Development</a></li>
-                                    <li><a href="course-2.html">Web Design</a></li>
-                                    <li><a href="course-2.html">SEO Optimize</a></li>
-                                </ul>
-                            </div>
+                    <!-- <div class="col-md-6 col-xl-auto">
+                    <div class="widget widget_nav_menu footer-widget">
+                        <h3 class="widget_title">Quick Links</h3>
+                        <div class="menu-all-pages-container">
+                            <ul class="menu">
+                                <li><a href="course-2.html">Life Coach</a></li>
+                                <li><a href="course-2.html">Business Coach</a></li>
+                                <li><a href="course-2.html">Health Coach</a></li>
+                                <li><a href="course-2.html">Development</a></li>
+                                <li><a href="course-2.html">Web Design</a></li>
+                                <li><a href="course-2.html">SEO Optimize</a></li>
+                            </ul>
                         </div>
                     </div>
+                </div> -->
                     <div class="col-md-6 col-xl-auto">
                         <div class="widget widget_nav_menu footer-widget">
                             <h3 class="widget_title">Our Courses</h3>
@@ -584,12 +585,10 @@ Servce Area
                             <h3 class="widget_title">Resources</h3>
                             <div class="menu-all-pages-container">
                                 <ul class="menu">
-                                    <li><a href="contact.html">Community</a></li>
-                                    <li><a href="contact.html">Support</a></li>
-                                    <li><a href="contact.html">Video Guides</a></li>
-                                    <li><a href="contact.html">Documentation</a></li>
-                                    <li><a href="contact.html">Security</a></li>
-                                    <li><a href="contact.html">Template</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="about.html">About</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -605,20 +604,20 @@ Servce Area
                                         <i class="fas fa-location-dot"></i>
                                     </div>
                                     <p class="info-box_text">
-                                        147/I, Green Road, Gulshan Avenue, Panthapath, Dhaka
+                                        Cleveland , Ohio
                                     </p>
                                 </div>
                                 <div class="info-box-wrap">
                                     <div class="info-box_icon">
                                         <i class="fas fa-envelope"></i>
                                     </div>
-                                    <a href="mailto:info@Edura.com" class="info-box_link">info@edura.com</a>
+                                    <a href="mailto:info@Edura.com" class="info-box_link">regalcomply@gmail.com</a>
                                 </div>
                                 <div class="info-box-wrap">
                                     <div class="info-box_icon">
                                         <i class="fas fa-phone"></i>
                                     </div>
-                                    <a href="tel:+11234567890" class="info-box_link">+256 214 203 215</a>
+                                    <a href="tel:+11234567890" class="info-box_link">+1 646 980 2390</a>
                                 </div>
                             </div>
                         </div>
@@ -630,8 +629,8 @@ Servce Area
             <div class="container">
                 <div class="row justify-content-between align-items-center">
                     <div class="col-md-6">
-                        <p class="copyright-text">Copyright © 2023 <a href="index.html">Regal Comply</a> All Rights Reserved.
-                        </p>
+                        <p class="copyright-text">Copyright © 2023 <a href="index.html">Regal Comply</a> All Rights
+                            Reserved.</p>
                     </div>
                     <div class="col-md-6 text-end d-none d-md-block">
                         <div class="footer-links">
@@ -691,23 +690,182 @@ Servce Area
 
     <script type="module" src="./firbaseScript.js"></script>
     <script type="module">
-        import { db, doc, getDoc ,fetchCourses} from './firbaseScript.js';
+        import { db, doc, getDoc, fetchCourses } from './firbaseScript.js';
+        const styles = `
+    #course-description {
+        font-family: inherit;
+        line-height: 1;
+        color: inherit;
+    }
+    
+    /* Headings */
+    #course-description h1,
+    #course-description h2,
+    #course-description h3,
+    #course-description h4,
+    #course-description h5,
+    #course-description h6 {
+        margin: 1em 0 0.5em;
+        font-weight: bold;
+        line-height: 1.2;
+    }
+    
+    #course-description h1 { font-size: 2em; }
+    #course-description h2 { font-size: 1.5em; }
+    #course-description h3 { font-size: 1.17em; }
+    #course-description h4 { font-size: 1em; }
+    #course-description h5 { font-size: 0.83em; }
+    #course-description h6 { font-size: 0.67em; }
+    
+    /* Lists */
+    #course-description ul,
+    #course-description ol {
+        padding-left: 2em;
+        margin: 0.5em 0;
+    }
+    
+    #course-description ul { list-style-type: disc; }
+    #course-description ol { list-style-type: decimal; }
+    
+    #course-description li {
+        margin: 0.2em 0;
+        padding-left: 0.5em;
+    }
+    
+    /* Nested lists */
+    #course-description ul ul,
+    #course-description ol ul {
+        list-style-type: circle;
+    }
+    
+    #course-description ul ul ul,
+    #course-description ol ul ul {
+        list-style-type: square;
+    }
+    
+    /* Text formatting */
+    #course-description strong,
+    #course-description b {
+        font-weight: bold;
+    }
+    
+    #course-description i,
+    #course-description em {
+        font-style: italic;
+    }
+    
+    #course-description mark {
+        background-color: #ff0;
+        padding: 0.2em;
+    }
+    
+    #course-description small {
+        font-size: 0.9em;
+    }
+    
+    #course-description del {
+        text-decoration: line-through;
+    }
+    
+    #course-description ins {
+        text-decoration: underline;
+    }
+    
+    #course-description sub {
+        vertical-align: sub;
+        font-size: smaller;
+    }
+    
+    #course-description sup {
+        vertical-align: super;
+        font-size: smaller;
+    }
+    
+    /* Block elements */
+    #course-description p {
+        margin: 1em 0;
+    }
+    
+    #course-description blockquote {
+        margin: 1em 2em;
+        padding: 0.5em 1em;
+        border-left: 3px solid #ccc;
+        background: #f9f9f9;
+    }
+    
+    #course-description pre,
+    #course-description code {
+        font-family: monospace;
+        background: #f5f5f5;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    
+    #course-description pre {
+        padding: 1em;
+        overflow-x: auto;
+        white-space: pre;
+        margin: 1em 0;
+    }
+    
+    #course-description pre code {
+        background: none;
+        padding: 0;
+    }
+    
+    /* Tables */
+    #course-description table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 1em 0;
+    }
+    
+    #course-description th,
+    #course-description td {
+        border: 1px solid #ddd;
+        padding: 0.5em;
+        text-align: left;
+    }
+    
+    #course-description th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+    }
+    
+    /* Links */
+    #course-description a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+    
+    #course-description a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Horizontal rule */
+    #course-description hr {
+        border: none;
+        border-top: 1px solid #ddd;
+        margin: 1em 0;
+    }
+`;
+        const styleSheet = document.createElement("style");
+        styleSheet.textContent = styles;
+        document.head.appendChild(styleSheet);
 
-
-        // Get course ID from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
         const courseId = urlParams.get('id');
         let allCourses = [];
         let filteredCourses = [];
 
         async function displayCourses() {
-        const courseListElement = document.getElementById('course-list');
-        courseListElement.innerHTML = ''; // Clear previous courses
+            const courseListElement = document.getElementById('course-list');
+            courseListElement.innerHTML = '';
 
-        filteredCourses.forEach(course => {
-            const courseBox = document.createElement('div');
-            courseBox.className = 'col-md-6 col-xl-4';
-            courseBox.innerHTML = `
+            filteredCourses.forEach(course => {
+                const courseBox = document.createElement('div');
+                courseBox.className = 'col-md-6 col-xl-4';
+                courseBox.innerHTML = `
                 <div class="course-box style2">
                     <div class="course-img">
                         <img src="${course.thumbnail}" alt="img">
@@ -720,57 +878,56 @@ Servce Area
                                 </div>(4.7)
                         </div>
                         <h3 class="course-title"><a href="course-details.html?id=${course.id}">${course.title}</a></h3>
-                        <div class="course-meta">
-                            <span><i class="fal fa-file"></i>Lesson 8</span>
-                            <span><i class="fal fa-user"></i>Students 50+</span>
-                            <span><i class="fal fa-chart-simple"></i> ${course.level}</span>
-                        </div>
+                       
                         <div class="course-author">
                            
-                            <div class="offer-tag">free</div>
+                            <div class="offer-tag">$${course.pricing.singleParticipant}</div>
                         </div>
                     </div>
                 </div>
             `;
-            courseListElement.appendChild(courseBox);
-        });
-    }
+                courseListElement.appendChild(courseBox);
+            });
+        }
 
-    async function init() {
-        allCourses = await fetchCourses();
-        filteredCourses = [...allCourses];
-        displayCourses(); 
-        console.log("All courses:", allCourses);
-    }
+        async function init() {
+            allCourses = await fetchCourses();
+            filteredCourses = [...allCourses];
+            displayCourses();
+            console.log("All courses:", allCourses);
+        }
 
-    init();
+        init();
 
 
-        // Function to populate course details
+        
         function populateCourseDetails(courseData) {
-            // Populate course image and title
+          
             document.getElementById('course-image').src = courseData.thumbnail;
             document.getElementById('course-title').textContent = courseData.title;
-            document.getElementById('course-level').textContent = courseData.level;
+         
             document.getElementById('course-category').textContent = courseData.category;
             document.getElementById('course-update-date').textContent = new Date(courseData.updatedAt).toISOString().split('T')[0];
+            console.log(" courseData.description", courseData.description);
+
+            const descriptionElement = document.getElementById('course-description');
+            descriptionElement.innerHTML = DOMPurify.sanitize(courseData.description, {
+                ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'i', 'em', 'mark', 'small', 'del', 'ins', 'sub', 'sup',
+                    'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre',
+                    'hr', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'div', 'span', 'a'],
+                ALLOWED_ATTR: ['href', 'target', 'class', 'id', 'style']
+            });
+
+            descriptionElement.style.cssText = `
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    `;
 
 
-            // Populate lesson count and student count
-            document.getElementById('lesson-count').textContent = `Lesson ${courseData.requirements.split('\n').length}`;
-            document.getElementById('student-count').textContent = `Students ${courseData.reviews.length}+`;
-
-            // Populate course description
-            document.getElementById('course-description').textContent = courseData.description;
-
-            
 
            
-
-          
-            // Populate pricing options
             const pricingList = document.getElementById('pricing-options');
-            pricingList.innerHTML = ''; // Clear existing content
+            pricingList.innerHTML = ''; 
 
             const pricingOptions = [
                 { name: "Single Participant", price: courseData.pricing.singleParticipant },
@@ -795,9 +952,9 @@ Servce Area
                 pricingList.appendChild(li);
             });
 
-            // Populate reviews
+           
             const reviewList = document.getElementById('review-list');
-            reviewList.innerHTML = ''; // Clear existing content
+            reviewList.innerHTML = ''; 
 
             if (courseData.reviews && courseData.reviews.length > 0) {
                 courseData.reviews.forEach(review => {
@@ -832,7 +989,7 @@ Servce Area
             plusButtons.forEach((button, index) => {
                 button.addEventListener('click', function () {
                     const input = this.parentElement.querySelector('.qty-input');
-                    const totalAmount = this.closest('li').querySelector('.total-amount'); // Find correctly
+                    const totalAmount = this.closest('li').querySelector('.total-amount');
 
                     if (!totalAmount) {
                         console.error("total-amount element not found!");
@@ -845,7 +1002,7 @@ Servce Area
                     if (value < parseInt(input.max, 10)) {
                         input.value = value + 1;
                         const price = parseFloat(amountElements[index].textContent.replace('$', ''));
-                        totalAmount.textContent = (value + 1) * price; // Update total price
+                        totalAmount.textContent = (value + 1) * price;
                     }
                 });
             });
@@ -853,7 +1010,7 @@ Servce Area
             minusButtons.forEach((button, index) => {
                 button.addEventListener('click', function () {
                     const input = this.parentElement.querySelector('.qty-input');
-                    const totalAmount = this.closest('li').querySelector('.total-amount'); // Find correctly
+                    const totalAmount = this.closest('li').querySelector('.total-amount'); 
 
                     if (!totalAmount) {
                         console.error("total-amount element not found!");
@@ -866,17 +1023,17 @@ Servce Area
                     if (value > parseInt(input.min, 10)) {
                         input.value = value - 1;
                         const price = parseFloat(amountElements[index].textContent.replace('$', ''));
-                        totalAmount.textContent = (value - 1) * price; // Update total price
+                        totalAmount.textContent = (value - 1) * price; 
                     }
                 });
             });
 
 
         }
-        // Fetch course data after DOM is fully loaded
+       
         document.addEventListener('DOMContentLoaded', () => {
             if (courseId) {
-                const courseRef = doc(db, 'courses', courseId); // Get a reference to the document
+                const courseRef = doc(db, 'courses', courseId);
                 getDoc(courseRef)
                     .then((doc) => {
                         if (doc.exists()) {

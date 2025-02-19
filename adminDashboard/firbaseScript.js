@@ -248,7 +248,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             const upTo5Participants = prices[3].value;
             const upTo10Participants = prices[4].value;
             const descriptionEditor = tinymce.get('course-description');
-            const description = descriptionEditor ? descriptionEditor.getContent({ format: 'text' }) : '';
+            const description = descriptionEditor ? descriptionEditor.getContent() : '';
+            console.log(description);
+            
             const requirementsEditor = tinymce.get('course-requirements');
             const requirements = requirementsEditor ? requirementsEditor.getContent({ format: 'text' }) : '';
 
@@ -405,7 +407,35 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     tinymce.init({
-        selector: 'textarea',
+        selector: '#course-description',
+        formats: {
+           
+            p: { block: 'p' },
+            h1: { block: 'h1' },
+            h2: { block: 'h2' },
+            h3: { block: 'h3' },
+            h4: { block: 'h4' },
+            h5: { block: 'h5' },
+            h6: { block: 'h6' },
+            pre: { block: 'pre' },
+          
+           
+            bold: { inline: 'strong' },
+            italic: { inline: 'em' },
+            underline: { inline: 'span', styles: { 'text-decoration': 'underline' } },
+            strikethrough: { inline: 'span', styles: { 'text-decoration': 'line-through' } },
+            
+         
+            listItemStyle: { styles: { listStyleType: '' } },
+            ul: { selector: 'ul', styles: { listStyleType: '' } },
+            ol: { selector: 'ol', styles: { listStyleType: '' } },
+          
+           
+            alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div', styles: { textAlign: 'left' } },
+            aligncenter: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div', styles: { textAlign: 'center' } },
+            alignright: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div', styles: { textAlign: 'right' } },
+            alignjustify: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div', styles: { textAlign: 'justify' } }
+          },
         plugins: [
 
             'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
