@@ -650,12 +650,7 @@ async function showCoursePreview(courseId) {
                     </div>
                 </div>
                 
-                ${course.requirements ?
-                `<div class="detail-item">
-                    <h3>Requirements</h3>
-                    <p>${course.requirements}</p>
-                   </div>` : ''
-            }
+               
                 
                 <div class="detail-item">
                     <h3>${course.updatedAt ? 'Last Updated' : 'Created'}</h3>
