@@ -268,18 +268,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (!isEditMode && thumbnailInput.files.length > 0) {
                 try {
                     const file = thumbnailInput.files[0];
-                    console.log("File selected:", file.name, file.type, file.size);
-
                     const storageRef = ref(storage, `course-thumbnails/${Date.now()}-${file.name}`);
-                    console.log("Uploading to:", storageRef.fullPath);
-
                     const snapshot = await uploadBytes(storageRef, file);
-                    console.log("Upload successful:", snapshot);
-
-                    thumbnailURL = await getDownloadURL(storageRef);
-                    console.log("Download URL obtained:", thumbnailURL);
-                } catch (uploadError) {
-                    console.error("Upload failed:", uploadError);
+                    thumbnailURL = await getDownloadURL(storageRef);                   
+                } catch (uploadError) {                  
                     alert(`File upload failed: ${uploadError.message}`);
                 }
             }
@@ -443,7 +435,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     if (isEditMode) {
-        document.title = 'Edit Course - Eduport';
+        document.title = 'Edit Course - Regal';
 
         if (thumbnailUploadContainer) {
             thumbnailUploadContainer.style.display = 'none';
