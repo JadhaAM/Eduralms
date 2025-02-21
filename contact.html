@@ -358,10 +358,7 @@ Contact Area
                     <div class="contact-form-wrap" data-bg-src="assets/img/bg/contact_bg_1.png">
                         <span class="sub-title">Contact With Us!</span>
                         <h2 class="border-title">Get in Touch</h2>
-                        <form name="contact" method="POST" data-netlify-recaptcha="true" class="contact-form ajax-contact">
-                            <!-- Netlify form detection -->
-                            <input type="hidden" name="form-name" value="contact">
-                            
+                        <form class="contact-form ajax-contact">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -382,9 +379,9 @@ Contact Area
                                             <option value="Data Science">Data Science</option>
                                             <option value="Marketing">Marketing</option>
                                             <option value="Human Resources">Human Resources</option>
-                                            <option value="Business">Business</option> 
-                                            <option value="Startups">Startups</option> 
-                                            <option value="Banking & Finance">Banking & Finance</option> 
+                                            <option value="Business">Business</option>
+                                            <option value="Startups">Startups</option>
+                                            <option value="Banking & Finance">Banking & Finance</option>
                                         </select>
                                     </div>
                                 </div>
@@ -600,43 +597,58 @@ Contact Area
     <!-- Main Js File -->
     <script src="assets/js/main.js"></script>
     <script>
-        document.querySelector("form[name='contact']").addEventListener("submit", function(e) {
-            const submitButton = this.querySelector('button[type="submit"]');
-            const formMessages = this.querySelector('.form-messages');
-            const originalButtonText = submitButton.innerHTML;
-            
-            
-            submitButton.innerHTML = 'Sending...<i class="fas fa-spinner fa-spin ms-2"></i>';
-            submitButton.disabled = true;
-            
-            fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(new FormData(this)).toString()
-            })
-            .then(() => {
-               
-                formMessages.innerHTML = '<div class="alert alert-success">Thank you! Your message has been sent successfully.</div>';
-                
-               
-                this.reset();
-                
-              
-                if (typeof $('.nice-select').niceSelect === 'function') {
-                    $('.nice-select').niceSelect('update');
-                }
-            })
-            .catch(error => {
-                
-                formMessages.innerHTML = '<div class="alert alert-danger">Sorry, there was an error sending your message. Please try again.</div>';
-                console.error('Error:', error);
-            })
-            .finally(() => {
-                
-                submitButton.innerHTML = originalButtonText;
-                submitButton.disabled = false;
-            });
-        });
+  
+function sendContact() {
+    $('.ajax-contact').on('submit', function(e) {
+        e.preventDefault();
+        
+        const form = $(this);
+        const submitButton = form.find('button[type="submit"]');
+        const originalButtonText = submitButton.html();
+        const formMessages = $('.form-messages');
+        
+        // Show loading state
+        submitButton.html('Sending Message<i class="fas fa-spinner fa-spin ms-2"></i>').prop('disabled', true);
+        
+        // Get form data
+        const formData = new FormData();
+        formData.append('entry.2005620554', $('#name').val());
+        formData.append('entry.1045781291', $('#email').val());
+        formData.append('entry.1065046570', $('#subject').val());
+        formData.append('entry.1166974658', $('#number').val());
+        formData.append('entry.839337160', $('#message').val());
+
+        const tempForm = document.createElement('form');
+        tempForm.method = 'POST';
+        tempForm.action = 'https://docs.google.com/forms/u/1/d/e/1FAIpQLScz4TLIzQlmgwVWUV-vVohGDaMruTmvCPMIOLSfqiR1hk_qsw/formResponse';
+        tempForm.target = '_blank';
+
+        for (const pair of formData.entries()) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = pair[0];
+            input.value = pair[1];
+            tempForm.appendChild(input);
+        }
+        document.body.appendChild(tempForm);
+        tempForm.submit();
+        document.body.removeChild(tempForm);
+        formMessages.html('<div class="alert alert-success">Thank you! Your message has been sent successfully.</div>');
+        form[0].reset();
+    
+        if (typeof $('.nice-select').niceSelect === 'function') {
+            $('.nice-select').niceSelect('update');
+        }
+        
+   
+        submitButton.html(originalButtonText).prop('disabled', false);
+    });
+}
+
+
+$(document).ready(function() {
+    sendContact();
+});
         </script>
 </body>
 
