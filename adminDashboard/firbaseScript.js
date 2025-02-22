@@ -278,7 +278,7 @@ function loginSubmit() {
 
 document.addEventListener('DOMContentLoaded', async function () {
    
-    checkAuthOnLoad();
+   await checkAuthOnLoad();
     loginSubmit();
     const form = document.getElementById('courseForm');
     const prevBtn = document.getElementById('prevBtn');
@@ -449,11 +449,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const upTo5Participants = prices[3].value;
             const upTo10Participants = prices[4].value;
             const description = $('#course-description').trumbowyg('html') || ''; 
-            console.log(description);
-           
-            
         
-
             const reviewItems = reviewsContainer.querySelectorAll('.review-item');
             const reviews = Array.from(reviewItems).map(item => {
                 return {
