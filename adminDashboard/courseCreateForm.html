@@ -4,9 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Course - Regal</title>
-    <script src="https://cdn.tiny.cloud/1/0gl9bvlc2ha8ubf0vh8ppzv5mm63zql3402s5i2ku5j2vlq2/tinymce/7/tinymce.min.js"
-        referrerpolicy="origin"></script>
+    <title>Edit Course - Regal</title> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Trumbowyg Core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/ui/trumbowyg.min.css">
+
+    <!-- Trumbowyg Core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/trumbowyg.min.js"></script>
+
+    <!-- Optional Trumbowyg plugins -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/colors/ui/trumbowyg.colors.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/colors/trumbowyg.colors.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/cleanpaste/trumbowyg.cleanpaste.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/pasteimage/trumbowyg.pasteimage.min.js"></script>
         <script src="config.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -214,8 +225,10 @@
                 </div>
                 <div class="form-group">
                     <label>Short Description</label>
-                    <textarea id="course-description" class="form-control" placeholder="Enter description" rows="4"
-                        required></textarea>
+                    <textarea id="course-description" class="trumbowyg-editor" placeholder="Enter description" rows="4"
+                    required></textarea>
+                    <!-- <textarea id="course-description" class="form-control" placeholder="Enter description" rows="4"
+                        required></textarea> -->
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -334,9 +347,39 @@
             <button type="button" class="btn btn-danger remove-review" style="margin-top: 0.5rem;">Remove Review</button>
         </div>
     </template>
-    
     <script type="module" src="./firbaseScript.js"></script>
-   
+    
 </body>
-
+<!-- Import jQuery -->
+<!-- Use these CDN links instead -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/trumbowyg.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/cleanpaste/trumbowyg.cleanpaste.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/pasteimage/trumbowyg.pasteimage.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#course-description').trumbowyg({
+            btns: [
+                ['viewHTML'],
+                ['formatting'],
+                ['strong', 'em', 'del'],
+                ['superscript', 'subscript'],
+                ['link'],
+                ['insertImage'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight'],
+                ['unorderedList', 'orderedList'],
+                ['horizontalRule'],
+                ['removeformat'],
+                ['fullscreen']
+            ],
+            plugins: {
+                cleanpaste: {
+                    allowStyle: true
+                },
+                pasteimage: {
+                    defaultWidth: '100%'
+                }
+            }
+        });
+    });
+    </script>
 </html>

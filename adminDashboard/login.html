@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - regalcomply</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Use same styles as your main app for consistency */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background: #f5f7f9;
+            padding: 2rem;
+        }
+
+        .auth-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #444;
+            font-weight: 500;
+        }
+
+        .password-field {
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6c757d;
+            background: none;
+            border: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background: #0d6efd;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-message {
+            color: #198754;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+
+        .forgot-password a {
+            color: #0d6efd;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .modal-title {
+            margin-bottom: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-actions .btn {
+            margin-bottom: 0;
+            width: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <h1>Login to regalcomply</h1>
+        <p>Sign in to manage your courses</p>
+
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+
+        <form id="authForm" onsubmit="loginSubmit();">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-field">
+                    <input type="password" class="form-control" id="password" placeholder="Enter your password"
+                        required>
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="forgot-password">
+                <a href="" id="forgotPasswordLink">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submitButton">Sign In</button>
+        </form>
+    </div>
+
+    <!-- Password Reset Modal -->
+    <div id="resetPasswordModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">Reset Password</h2>
+            <p>Enter your email address and we'll send you a link to reset your password.</p>
+
+            <div id="resetErrorMessage" class="error-message"></div>
+
+            <div class="form-group">
+                <label for="resetEmail">Email address</label>
+                <input type="email" class="form-control" id="resetEmail" placeholder="Enter your email" required>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancelReset">Cancel</button>
+                <button class="btn btn-primary" id="sendResetLink">Send Reset Link</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script type="module" src="./firbaseScript.js"></script>
+   
+</body>
+
+</html>

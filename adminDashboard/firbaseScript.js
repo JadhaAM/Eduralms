@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
 import { getFirestore, collection, getDocs, addDoc, getDoc, deleteDoc, doc, updateDoc } from 'https://www.gstatic.com/firebasejs/11.3.0/firebase-firestore.js';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/11.3.0/firebase-storage.js';
+import {  getAuth, sendPasswordResetEmail, signInWithEmailAndPassword,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: window.env.apiKey,
@@ -15,6 +16,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+export const auth = getAuth(app);
 
 const loadingOverlay = document.createElement('div');
 loadingOverlay.className = 'loading-overlay';
@@ -61,11 +63,19 @@ style.textContent = `
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
+        } 
+            .shake {
+        animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    }
+    
+    @keyframes shake {
+        10%, 90% { transform: translate3d(-1px, 0, 0); }
+        20%, 80% { transform: translate3d(2px, 0, 0); }
+        30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+        40%, 60% { transform: translate3d(4px, 0, 0); }
+    }
     `;
 document.head.appendChild(style);
-
-// Function to show/hide loading overlay
 function showLoading(text = 'Processing...') {
     loadingOverlay.querySelector('.loading-text').textContent = text;
     loadingOverlay.classList.add('active');
@@ -73,10 +83,203 @@ function showLoading(text = 'Processing...') {
 
 function hideLoading() {
     loadingOverlay.classList.remove('active');
+}  
+function getCurrentUser() {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        unsubscribe();
+        resolve(user);
+      }, reject);
+    });
+}
+
+async function checkAuthOnLoad() {
+    try {
+
+        return new Promise((resolve) => {
+            auth.onAuthStateChanged(user => {
+                if (window.location.pathname.includes('login.html')) {
+                    if (user) {
+            
+                        window.location.href = './index.html';
+                        resolve(user);
+                    } else {
+                    
+                        resolve(null);
+                    }
+                } else {
+
+                    if (!user) {
+                     
+                        console.log('User not authenticated, redirecting to login');
+                        window.location.href = './login.html';
+                        resolve(null);
+                    } else {
+                    
+                        resolve(user);
+                    }
+                }
+            });
+        });
+    } catch (error) {
+    
+        if (!window.location.pathname.includes('login.html')) {
+            window.location.href = './login.html';
+        }
+        return null;
+    }
+}
+
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                window.location.href = './login.html';
+            } catch (error) {
+                console.error('Error signing out:', error);
+            }
+        });
+    } 
+
+    function handleLoginError(error) {
+        const errorMessage = document.getElementById('errorMessage');
+   
+            if ('auth/invalid-credential') {
+             
+                 if (error.message.toLowerCase().includes('password')) {
+                    errorMessage.textContent = 'Incorrect password. Please check and try again.';
+                } 
+           
+                else if (error.message.toLowerCase().includes('email') && 
+                         error.message.toLowerCase().includes('password')) {
+                    errorMessage.textContent = 'Invalid email and password combination. Please verify your login details.';
+                }
+              
+                else {
+                    errorMessage.textContent = 'Invalid login credentials. Please check your details.';
+                }
+            } 
+        errorMessage.style.display = 'block'; 
+        errorMessage.classList.add('shake');
+        setTimeout(() => {
+            errorMessage.classList.remove('shake');
+        }, 5000);
+    }
+
+function loginSubmit() {
+    const authForm = document.getElementById('authForm');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+    const resetPasswordModal = document.getElementById('resetPasswordModal');
+    const resetEmail = document.getElementById('resetEmail');
+    const resetErrorMessage = document.getElementById('resetErrorMessage');
+    const cancelReset = document.getElementById('cancelReset');
+    const sendResetLink = document.getElementById('sendResetLink');
+    const passwordField = document.getElementById('password');
+    const passwordToggle = document.getElementById('passwordToggle');
+
+
+    if (authForm) {
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            showLoading('Signing in...');
+            
+            try {
+                const email = document.getElementById('email').value;
+                const password = passwordField.value;
+                
+                await signInWithEmailAndPassword(auth, email, password);
+                window.location.href = './index.html';
+            } catch (error) {
+                console.error('Login error:', error);
+                handleLoginError(error);
+            } finally {
+                hideLoading();
+            }
+        });
+    }
+
+    if (passwordToggle && passwordField) {
+        passwordToggle.addEventListener('click', () => {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+
+            const icon = passwordToggle.querySelector('i');
+            if (icon) {
+                if (type === 'password') {
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                } else {
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                }
+            }
+        });
+    }
+
+    if (forgotPasswordLink && resetPasswordModal) {
+        forgotPasswordLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            resetPasswordModal.style.display = 'flex';
+            
+            const loginEmail = document.getElementById('email').value;
+            if (loginEmail) {
+                resetEmail.value = loginEmail;
+            }
+        });
+    }
+    
+    if (cancelReset && resetPasswordModal) {
+        cancelReset.addEventListener('click', () => {
+            resetPasswordModal.style.display = 'none';
+            resetErrorMessage.style.display = 'none';
+            resetEmail.value = '';
+        });
+    }
+
+    if (sendResetLink) {
+        sendResetLink.addEventListener('click', async () => {
+            const email = resetEmail.value;
+
+            if (!email) {
+                resetErrorMessage.textContent = 'Please enter your email address';
+                resetErrorMessage.style.display = 'block';
+                return;
+            }
+
+            resetErrorMessage.style.display = 'none';
+            showLoading('Sending reset email...');
+
+            try {
+                await sendPasswordResetEmail(auth, email);
+                resetPasswordModal.style.display = 'none';
+                resetEmail.value = '';
+
+                successMessage.textContent = 'Password reset email sent. Please check your inbox.';
+                successMessage.style.display = 'block';
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 500);
+            } catch (error) {
+                console.error('Password reset error:', error);
+                resetErrorMessage.textContent = error.message;
+                resetErrorMessage.style.display = 'block';
+            } finally {
+                hideLoading();
+            }
+        });
+    } 
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
-
+   
+    checkAuthOnLoad();
+    loginSubmit();
     const form = document.getElementById('courseForm');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -198,13 +401,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         }
 
-        if (courseData.description && tinymce.get('course-description')) {
-            tinymce.get('course-description').setContent(courseData.description);
+        if (courseData.description) {
+            $('#course-description').trumbowyg('html', courseData.description);
         }
 
-        if (courseData.requirements && tinymce.get('course-requirements')) {
-            tinymce.get('course-requirements').setContent(courseData.requirements);
-        }
+        
         const prices = form.querySelectorAll('input[type="number"]');
         if (courseData.pricing) {
             prices[0].value = courseData.pricing.singleParticipant || '';
@@ -247,12 +448,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             const preRecording = prices[2].value;
             const upTo5Participants = prices[3].value;
             const upTo10Participants = prices[4].value;
-            const descriptionEditor = tinymce.get('course-description');
-            const description = descriptionEditor ? descriptionEditor.getContent() : '';
+            const description = $('#course-description').trumbowyg('html') || ''; 
             console.log(description);
+           
             
-            const requirementsEditor = tinymce.get('course-requirements');
-            const requirements = requirementsEditor ? requirementsEditor.getContent({ format: 'text' }) : '';
+        
 
             const reviewItems = reviewsContainer.querySelectorAll('.review-item');
             const reviews = Array.from(reviewItems).map(item => {
@@ -292,7 +492,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     upTo5Participants: Number(upTo5Participants),
                     upTo10Participants: Number(upTo10Participants)
                 },
-                requirements: requirements,
+           
                 reviews: reviews,
                 updatedAt: new Date().toISOString()
             };
@@ -406,63 +606,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     });
 
-    tinymce.init({
-        selector: '#course-description',
-        formats: {
-           
-            p: { block: 'p' },
-            h1: { block: 'h1' },
-            h2: { block: 'h2' },
-            h3: { block: 'h3' },
-            h4: { block: 'h4' },
-            h5: { block: 'h5' },
-            h6: { block: 'h6' },
-            pre: { block: 'pre' },
-          
-           
-            bold: { inline: 'strong' },
-            italic: { inline: 'em' },
-            underline: { inline: 'span', styles: { 'text-decoration': 'underline' } },
-            strikethrough: { inline: 'span', styles: { 'text-decoration': 'line-through' } },
-            
-         
-            listItemStyle: { styles: { listStyleType: '' } },
-            ul: { selector: 'ul', styles: { listStyleType: '' } },
-            ol: { selector: 'ol', styles: { listStyleType: '' } },
-          
-           
-            alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div', styles: { textAlign: 'left' } },
-            aligncenter: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div', styles: { textAlign: 'center' } },
-            alignright: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div', styles: { textAlign: 'right' } },
-            alignjustify: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div', styles: { textAlign: 'justify' } }
-          },
-        plugins: [
-
-            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-            'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
-        ],
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
-        mergetags_list: [
-            { value: 'First.Name', title: 'First Name' },
-            { value: 'Email', title: 'Email' },
-        ],
-        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-        setup: function (editor) {
-            editor.on('init', function () {
-                if (isEditMode && courseData) {
-                    if (editor.id === 'course-description' && courseData.description) {
-                        editor.setContent(courseData.description);
-                    } else if (editor.id === 'course-requirements' && courseData.requirements) {
-                        editor.setContent(courseData.requirements);
-                    } else if (editor.id === 'course-outcomes' && courseData.learningOutcomes) {
-                        editor.setContent(courseData.learningOutcomes);
-                    }
-                }
-            });
-        }
-    });
+   
 
     if (isEditMode) {
         document.title = 'Edit Course - Regal';

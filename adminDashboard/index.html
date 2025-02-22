@@ -9,6 +9,7 @@
     <style>
         :root {
             --primary: #0d6efd;
+            --denger: #fd0d1d;
             --secondary: #6c757d;
             --success: #198754;
             --purple: #6f42c1;
@@ -232,6 +233,10 @@
             background: var(--primary);
             color: white;
         }
+        .btn-denger {
+            background: var(--denger);
+            color: white;
+        }
 
         .btn-secondary {
             background: var(--secondary);
@@ -303,6 +308,7 @@
             </div>
             <button class="btn btn-primary" onclick="window.location.href='./courseCreateForm.html'">Add New
                 Course</button>
+            <button id="logoutBtn" class="btn btn-denger">LogOut</button>
         </div>
 
         <div class="stats-grid">
@@ -407,7 +413,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
     <script type="module" src="./firbaseScript.js"></script>
-    <script>
+    <script> 
+    
         const ctx = document.getElementById('earningsChart').getContext('2d');
         new Chart(ctx, {
             type: 'line',
