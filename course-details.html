@@ -538,12 +538,14 @@ Servce Area
                                 <h3 class="widget_title">About Company</h3>
                                 <p class="about-text">Regal Comply offers top-tier training in HR, compliance, tech &
                                     more, empowering professionals with expert-led courses.</p>
-                                    <div class="th-social">
-                                        <h6 class="title text-white">FOLLOW US ON:</h6>
-                                        <a href="https://www.facebook.com/share/1KjwPQixE1/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
-                                        <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
-                                        <a href="https://www.linkedin.com/company/regal-comply/"><i class="fab fa-linkedin-in"></i></a>
-                                    </div>
+                                <div class="th-social">
+                                    <h6 class="title text-white">FOLLOW US ON:</h6>
+                                    <a href="https://www.facebook.com/share/1KjwPQixE1/?mibextid=wwXIfr"><i
+                                            class="fab fa-facebook-f"></i></a>
+                                    <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/company/regal-comply/"><i
+                                            class="fab fa-linkedin-in"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -608,7 +610,8 @@ Servce Area
                                     <div class="info-box_icon">
                                         <i class="fas fa-envelope"></i>
                                     </div>
-                                    <a href="mailto:regalcomply@gmail.com" class="info-box_link">regalcomply@gmail.com</a>
+                                    <a href="mailto:regalcomply@gmail.com"
+                                        class="info-box_link">regalcomply@gmail.com</a>
                                 </div>
                                 <div class="info-box-wrap">
                                     <div class="info-box_icon">
@@ -632,8 +635,12 @@ Servce Area
                     <div class="col-md-6 text-end d-none d-md-block">
                         <div class="footer-links">
                             <ul>
-                                <li><a href="https://docs.google.com/document/d/1Nl-jJTMoHeeU9lovOZj78Gw8ewdpLEQA0ZSTe6_7bwo/edit?usp=sharing">Privacy Policy</a></li>
-                                <li><a href="https://docs.google.com/document/d/1HcsZN_C0fPhq0-zLsfQg4oqaBCzUa5zDLTBGalbjEzQ/edit?usp=sharing">Terms & Condition</a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1Nl-jJTMoHeeU9lovOZj78Gw8ewdpLEQA0ZSTe6_7bwo/edit?usp=sharing">Privacy
+                                        Policy</a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1HcsZN_C0fPhq0-zLsfQg4oqaBCzUa5zDLTBGalbjEzQ/edit?usp=sharing">Terms
+                                        & Condition</a></li>
                             </ul>
                         </div>
                     </div>
@@ -854,11 +861,11 @@ Servce Area
         const courseId = urlParams.get('id');
         let allCourses = [];
         let filteredCourses = [];
-      
+
         async function displayCourses() {
             const courseListElement = document.getElementById('course-list');
             courseListElement.innerHTML = '';
-            
+
             filteredCourses.forEach(course => {
                 const courseBox = document.createElement('div');
                 courseBox.className = 'col-md-6 col-xl-4';
@@ -898,29 +905,32 @@ Servce Area
 
 
         function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric'
-    });
-}
+            const date = new Date(dateString);
+
+            return date.toLocaleDateString('en-US', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
         function formatTime(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',   
-    });
-}
+            const [hours, minutes] = dateString.split(':');
+            const date = new Date();
+            date.setHours(hours, minutes);
+            return date.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+            });
+        }
         function populateCourseDetails(courseData) {
-          
+
             document.getElementById('course-image').src = courseData.thumbnail;
             document.getElementById('course-title').textContent = courseData.title;
-         
+
             document.getElementById('course-category').textContent = courseData.category;
             document.getElementById('course-update-date').textContent = new Date(courseData.updatedAt).toISOString().split('T')[0];
             document.getElementById('course-date').textContent = formatDate(courseData.courseDate);
-            document.getElementById('course-time').textContent = courseData.courseTime;
+            document.getElementById('course-time').textContent = formatTime(courseData.courseTime);
             console.log(" courseData.description", courseData.description);
 
             const descriptionElement = document.getElementById('course-description');
@@ -938,9 +948,9 @@ Servce Area
 
 
 
-           
+
             const pricingList = document.getElementById('pricing-options');
-            pricingList.innerHTML = ''; 
+            pricingList.innerHTML = '';
 
             const pricingOptions = [
                 { name: "Single Participant", price: courseData.pricing.singleParticipant },
@@ -965,9 +975,9 @@ Servce Area
                 pricingList.appendChild(li);
             });
 
-           
+
             const reviewList = document.getElementById('review-list');
-            reviewList.innerHTML = ''; 
+            reviewList.innerHTML = '';
 
             if (courseData.reviews && courseData.reviews.length > 0) {
                 courseData.reviews.forEach(review => {
@@ -1023,7 +1033,7 @@ Servce Area
             minusButtons.forEach((button, index) => {
                 button.addEventListener('click', function () {
                     const input = this.parentElement.querySelector('.qty-input');
-                    const totalAmount = this.closest('li').querySelector('.total-amount'); 
+                    const totalAmount = this.closest('li').querySelector('.total-amount');
 
                     if (!totalAmount) {
                         console.error("total-amount element not found!");
@@ -1036,14 +1046,14 @@ Servce Area
                     if (value > parseInt(input.min, 10)) {
                         input.value = value - 1;
                         const price = parseFloat(amountElements[index].textContent.replace('$', ''));
-                        totalAmount.textContent = (value - 1) * price; 
+                        totalAmount.textContent = (value - 1) * price;
                     }
                 });
             });
 
 
         }
-       
+
         document.addEventListener('DOMContentLoaded', () => {
             if (courseId) {
                 const courseRef = doc(db, 'courses', courseId);
