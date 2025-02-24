@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Regal - Online Courses & Education HTML Template - Home Eight</title>
+    <title>RegalComply – Industry-Leading Training in HR, Marketing & Startups</title>
     <meta name="author" content="themeholy">
-    <meta name="description" content="Edura - Online Courses & Education HTML Template">
-    <meta name="keywords" content="Edura - Online Courses & Education HTML Template">
+    <meta name="description" content="Your trusted platform for expert-led training in HR compliance, startups, and marketing">
+    <meta name="keywords" content="HR compliance training, marketing courses, startup business training, professional certification, online webinars, RegalComply training">
     <meta name="robots" content="INDEX,FOLLOW">
 
     <!-- Mobile Specific Metas -->
@@ -499,11 +499,11 @@ Counter Area
     <!--==============================
 Course Area  
 ==============================-->
-    <!-- <section class="space" id="course-sec">
+    <section class="space" id="course-sec">
         <div class="container">
             <div class="title-area text-center">
                 <span class="sub-title">Popular Courses</span>
-                <h2 class="sec-title fw-medium">Explore Courses</h2>
+                
             </div>
             <div class="row th-carousel" id="course-list" data-slide-show="3" data-ml-slide-show="3" data-lg-slide-show="2" data-md-slide-show="2" data-sm-slide-show="1">
 
@@ -512,7 +512,7 @@ Course Area
         </div>
         <div class="shape-mockup jump" data-top="13%" data-left="0%"><img src="assets/img/update1/shape/line_4.png" alt="shapes"></div>
         <div class="shape-mockup jump-reverse" data-bottom="3%" data-right="0%"><img src="assets/img/update1/shape/dot_shape_4.png" alt="shapes"></div>
-    </section> -->
+    </section> 
     <!--==============================
 why Area  
 ==============================-->
@@ -574,89 +574,24 @@ why Area
     <!--==============================
 Course Area  
 ==============================-->
-    <!-- <section class="space-extra-top">
+     <!-- <section class="space-extra-top">
         <div class="container">
             <div class="title-area text-center">
                 <span class="sub-title">Popular Courses</span>
-                <h2 class="sec-title fw-medium">Watch Free Courses</h2>
+                
             </div>
         </div>
-        <div class="course-sec space-bottom">
-            <div class="bg-shape gr-bg1"></div>
-            <div class="container">
-
-                <div class="course-grid2">
-                    <div class="course-img">
-                        <img src="assets/img/update1/course/course_5_1.jpg" alt="course">
-                        <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" class="play-btn popup-video"><i class="fas fa-play"></i></a>
-                    </div>
-                    <div class="course-content">
-                        <h3 class="course-title"><a href="course-details.html">How To Make Something Very Easier</a></h3>
-                        <a href="course.html" class="course-author">by David Anfle Smith</a>
-                        <div class="course-meta">
-                            <div class="meta-box">
-                                <i class="fas fa-file"></i>
-                                <div>
-                                    <span class="text">Total Lesson:</span>
-                                    <span class="number">328</span>
-                                </div>
-                            </div>
-                            <div class="meta-box">
-                                <i class="fas fa-user"></i>
-                                <div>
-                                    <span class="text">Total Students:</span>
-                                    <span class="number">25,869</span>
-                                </div>
-                            </div>
-                            <div class="meta-box">
-                                <i class="fas fa-eye"></i>
-                                <div>
-                                    <span class="text">Total Views:</span>
-                                    <span class="number">1256k</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="course-grid2">
-                    <div class="course-img">
-                        <img src="assets/img/update1/course/course_5_2.jpg" alt="course">
-                        <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" class="play-btn popup-video"><i class="fas fa-play"></i></a>
-                    </div>
-                    <div class="course-content">
-                        <h3 class="course-title"><a href="course-details.html">Try To Make Something Very Easily</a></h3>
-                        <a href="course.html" class="course-author">by David Anfle Smith</a>
-                        <div class="course-meta">
-                            <div class="meta-box">
-                                <i class="fas fa-file"></i>
-                                <div>
-                                    <span class="text">Total Lesson:</span>
-                                    <span class="number">526</span>
-                                </div>
-                            </div>
-                            <div class="meta-box">
-                                <i class="fas fa-user"></i>
-                                <div>
-                                    <span class="text">Total Students:</span>
-                                    <span class="number">25,777</span>
-                                </div>
-                            </div>
-                            <div class="meta-box">
-                                <i class="fas fa-eye"></i>
-                                <div>
-                                    <span class="text">Total Views:</span>
-                                    <span class="number">1352k</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+            <div class="course-Reviews">
+                <div class="th-comments-wrap ">
+                    <ul class="comment-list" id="review-list">
+                    
+                    </ul>
                 </div>
             </div>
-            <div class="shape-mockup" data-bottom="0%" data-right="0%"><img src="assets/img/update1/shape/line_5.png" alt="shapes"></div>
         </div>
         <div class="shape-mockup jump" data-top="0%" data-left="0%"><img src="assets/img/update1/shape/dot_shape_5.png" alt="shapes"></div>
-    </section> -->
+    </section>  -->
     <!--==============================
 About Area  
 ==============================-->
@@ -1022,7 +957,7 @@ Blog Area
         const courseListElement = document.getElementById('course-list');
         courseListElement.innerHTML = ''; // Clear previous courses
 
-        filteredCourses.forEach(course => {
+        filteredCourses.slice(0, 4).forEach(course => {
             const courseBox = document.createElement('div');
             courseBox.className = 'col-md-6 col-xl-4';
             courseBox.innerHTML = `
@@ -1046,7 +981,8 @@ Blog Area
                     </div>
                 </div>
             `;
-            courseListElement.appendChild(courseBox);
+            courseListElement.appendChild(courseBox); 
+            
         });
     }
 
