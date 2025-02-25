@@ -663,7 +663,7 @@ function getRandomColor() {
 
 function renderCourses(tableSelector = '.courses-table', limitToRecent = false) {
     const tbody = document.querySelector(`${tableSelector} tbody`);
-    document.getElementById('total-courses').textContent=filteredCourses.length;
+  
     console.log(filteredCourses.length);
     
     if (!tbody) return;
@@ -922,7 +922,8 @@ window.toggleCourseVisibility = (courseId) => {
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => { 
+   
     if (!document.getElementById('coursePreviewOverlay')) {
         const overlay = document.createElement('div');
         overlay.id = 'coursePreviewOverlay';
@@ -938,6 +939,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchCourses().then(() => {
         renderCourses('.courses-table', false);
-        renderCourses('.adminCourses-table', true);
+        renderCourses('.adminCourses-table', true); 
+        document.getElementById('total-courses').textContent=filteredCourses.length;
     });
 });
