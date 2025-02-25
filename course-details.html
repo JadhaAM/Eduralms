@@ -449,7 +449,7 @@ Event Area
                                     <!-- Pricing options will be populated here -->
                                 </ul>
                             </div>
-                            <a href="#" class="th-btn style4 mt-25">Buy Now</a>
+                            <a href="#" id="PaymentLink" class="th-btn style4 mt-25">Buy Now</a>
                             <h3 class="widget_title">Course Information</h3>
                             <div class="info-list">
                                 <ul>
@@ -927,7 +927,7 @@ Servce Area
 
             document.getElementById('course-image').src = courseData.thumbnail;
             document.getElementById('course-title').textContent = courseData.title;
-
+            document.getElementById('PaymentLink').href = courseData.PaymentLink;
             document.getElementById('course-category').textContent = courseData.category;
             document.getElementById('course-update-date').textContent = new Date(courseData.updatedAt).toISOString().split('T')[0];
             document.getElementById('course-date').textContent = formatDate(courseData.courseDate);

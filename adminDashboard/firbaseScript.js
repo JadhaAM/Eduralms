@@ -442,6 +442,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const courseTitle = form.querySelector('input[placeholder="Enter course title"]').value;
             const category = document.getElementById('courseCategory').value;
             const level = document.getElementById('courseLevel').value;
+            const PaymentLink = document.getElementById('Payment-link').value;
             const courseDate = document.getElementById('courseDate').value;
             const courseTime= document.getElementById('courseTime').value;
             const prices = form.querySelectorAll('input[type="number"]');
@@ -494,6 +495,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 reviews: reviews,
                 courseTime:courseTime,
                 courseDate:courseDate,
+                PaymentLink:PaymentLink,
                 updatedAt: new Date().toISOString()
             };
 
