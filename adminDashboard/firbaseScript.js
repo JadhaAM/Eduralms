@@ -661,6 +661,9 @@ function getRandomColor() {
 
 function renderCourses(tableSelector = '.courses-table', limitToRecent = false) {
     const tbody = document.querySelector(`${tableSelector} tbody`);
+    document.getElementById('total-courses').textContent=filteredCourses.length;
+    console.log(filteredCourses.length);
+    
     if (!tbody) return;
 
     tbody.innerHTML = '';

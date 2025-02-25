@@ -916,11 +916,12 @@ Servce Area
         function formatTime(dateString) {
             const [hours, minutes] = dateString.split(':');
             const date = new Date();
-            date.setHours(hours, minutes);
+            date.setHours(hours , minutes);
             return date.toLocaleTimeString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
-            });
+                timeZone: 'America/New_York',
+            })+ " EST";
         }
         function populateCourseDetails(courseData) {
 
@@ -930,8 +931,9 @@ Servce Area
             document.getElementById('course-category').textContent = courseData.category;
             document.getElementById('course-update-date').textContent = new Date(courseData.updatedAt).toISOString().split('T')[0];
             document.getElementById('course-date').textContent = formatDate(courseData.courseDate);
-            document.getElementById('course-time').textContent = formatTime(courseData.courseTime);
-            console.log(" courseData.description", courseData.description);
+            document.getElementById('course-time').textContent = formatTime("4:30"); 
+            console.log("courseData.courseTime",courseData.courseTime);
+            
 
             const descriptionElement = document.getElementById('course-description');
             descriptionElement.innerHTML = DOMPurify.sanitize(courseData.description, {
