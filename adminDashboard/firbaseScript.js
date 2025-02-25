@@ -401,6 +401,19 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         }
 
+        if (courseData.PaymentLink) {
+            const PaymentLink = document.getElementById('Payment-link');
+            PaymentLink.value = courseData.PaymentLink;
+        }
+        if (courseData.courseDate) {
+            const courseDate = document.getElementById('courseDate');
+            courseDate.value = courseData.courseDate;
+        }
+        if (courseData.courseTime) {
+            const courseTime= document.getElementById('courseTime');
+            courseTime.value = courseData.courseTime;
+        }
+        
         if (courseData.description) {
             $('#course-description').trumbowyg('html', courseData.description);
         }
@@ -663,8 +676,6 @@ function getRandomColor() {
 
 function renderCourses(tableSelector = '.courses-table', limitToRecent = false) {
     const tbody = document.querySelector(`${tableSelector} tbody`);
-  
-    console.log(filteredCourses.length);
     
     if (!tbody) return;
 
