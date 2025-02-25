@@ -6,4 +6,4 @@ window.env = {
     messagingSenderId: "734777210020",
     appId: "1:734777210020:web:b54852c7084cd64c4ca231",
     measurementId: "G-77BM0P02MB"
-}; 
+};
