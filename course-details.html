@@ -917,10 +917,10 @@ Servce Area
             const [hours, minutes] = dateString.split(':');
             const date = new Date();
             date.setHours(hours , minutes);
-            return date.toLocaleTimeString('en-US', {
+            return date.toLocaleTimeString('en-IN', {
                 hour: '2-digit',
                 minute: '2-digit',
-                timeZone: 'America/New_York',
+              timeZone: 'Asia/Kolkata'
             })+ " EST";
         }
         function populateCourseDetails(courseData) {
