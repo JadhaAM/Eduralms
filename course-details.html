@@ -914,15 +914,20 @@ Servce Area
             });
         }
         function formatTime(dateString) {
-            const [hours, minutes] = dateString.split(':');
-            const date = new Date();
-            date.setHours(hours , minutes);
-            return date.toLocaleTimeString('en-IN', {
-                hour: '2-digit',
-                minute: '2-digit',
-              timeZone: 'Asia/Kolkata'
-            })+ " EST";
-        }
+    const [hours, minutes] = dateString.split(':').map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, 0); 
+
+    return date.toLocaleTimeString('en-IN', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: 'Asia/Kolkata'
+    }) + " IST";
+}
+
+
+
         function populateCourseDetails(courseData) {
 
             document.getElementById('course-image').src = courseData.thumbnail;
@@ -931,7 +936,7 @@ Servce Area
             document.getElementById('course-category').textContent = courseData.category;
             document.getElementById('course-update-date').textContent = new Date(courseData.updatedAt).toISOString().split('T')[0];
             document.getElementById('course-date').textContent = formatDate(courseData.courseDate);
-            document.getElementById('course-time').textContent = formatTime("4:30"); 
+            document.getElementById('course-time').textContent = formatTime(courseData.courseTime); 
             console.log("courseData.courseTime",courseData.courseTime);
             
 
